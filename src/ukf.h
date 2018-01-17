@@ -28,8 +28,17 @@ public:
   ///* state covariance matrix
   MatrixXd P_;
 
+  // augmented sigma point matrix
+  MatrixXd Xsig_aug_;
+
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
+
+  // sigma points in measurement space
+  MatrixXd Zsig_;
+
+  //
+  VectorXd z_pred_;
 
   ///* time when the state is true, in us
   long long time_us_;
@@ -61,12 +70,26 @@ public:
   ///* State dimension
   int n_x_;
 
+  // Number of Sigma points
+  int n_aug_sigma_;
+
   ///* Augmented state dimension
   int n_aug_;
+
+  //set measurement dimension, radar can measure r, phi, and r_dot
+  int n_z_;
 
   ///* Sigma point spreading parameter
   double lambda_;
 
+  // measurement covariance matrix
+  MatrixXd R_;
+  MatrixXd R_laser_;
+  MatrixXd R_radar_;
+
+  MatrixXd S_;
+
+  double NIS_;
 
   /**
    * Constructor
@@ -102,6 +125,15 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+
+  void AugmentedSigmaPoints();
+  void SigmaPointPrediction(double delta_t);
+  void PredictMeanAndCovariance();
+  void PredictRadarMeasurement();
+  void PredictLidarMeasurement();
+  void UpdateState(MeasurementPackage meas_package);
+  void SaveNIS(MeasurementPackage meas_package);
 };
 
 #endif /* UKF_H */

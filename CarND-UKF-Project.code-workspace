@@ -4,5 +4,14 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"locale": "cpp",
+			"string": "cpp",
+			"__locale": "cpp",
+			"algorithm": "cpp",
+			"bitset": "cpp",
+			"ostream": "cpp"
+		}
+	}
 }
