@@ -477,10 +477,11 @@ void UKF::UpdateState(MeasurementPackage meas_package) {
   P_ = P_ - K * S_ * K.transpose();
 
   // calculate NIS
-  NIS_ = 
+  // NIS_ = 
+
   // cout << "P_ = " << endl << P_ << endl;
 }
 
-void UKF::SaveNIS(MeasurementPackage meas_package) {
+// void UKF::SaveNIS(MeasurementPackage meas_package) {
 
-}
+// }
